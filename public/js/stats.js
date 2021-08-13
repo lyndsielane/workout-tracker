@@ -109,5 +109,3 @@ function populateChart(data) {
 
 // get all workout data from back-end
 API.getWorkoutsInRange().then(populateChart);
-
-module.exports = stats;
