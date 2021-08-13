@@ -21,6 +21,19 @@ router.get("/:id", (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
+router.put("/:id", (req, res) => {
+  Workout.updateOne(
+    { _id: req.params.id },
+    {
+      $push: {
+        exercises: req.body,
+      },
+    }
+  )
+    .then((data) => res.json(data))
+    .catch((err) => res.status(400).json(err));
+});
+
 /*
 router.post("/api/exercise", ({ body }, res) => {
   Workout.create(body)
