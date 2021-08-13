@@ -15,6 +15,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useFindAndModify: false,
 });
 
+mongoose.set("toJSON", { virtuals: true });
+
 // routes
 app.use(morgan("combined"));
 

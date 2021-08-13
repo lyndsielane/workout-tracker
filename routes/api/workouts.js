@@ -3,13 +3,15 @@ const { Workout } = require("../../models");
 
 router.get("/", (req, res) => {
   Workout.find()
-    .sort({ date: -1 })
-    .then((dbWorkout) => {
-      res.json(dbWorkout);
-    })
-    .catch((err) => {
-      res.status(400).json(err);
-    });
+    .sort({ day: -1 })
+    .then((data) => res.json(data))
+    .catch((err) => res.status(400).json(err));
+});
+
+router.get("/:id", (req, res) => {
+  Workout.findById(req.params.id)
+    .then((data) => res.json(data))
+    .catch((err) => res.status(400).json(err));
 });
 
 /*
@@ -25,17 +27,6 @@ router.post("/api/exercise", ({ body }, res) => {
 
 router.post("/api/dashboard", ({ body }, res) => {
   Workout.insertMany(body)
-    .then((dbWorkout) => {
-      res.json(dbWorkout);
-    })
-    .catch((err) => {
-      res.status(400).json(err);
-    });
-});
-
-router.get("/api/exercise", (req, res) => {
-  Workout.find({})
-    .sort({ date: -1 })
     .then((dbWorkout) => {
       res.json(dbWorkout);
     })
